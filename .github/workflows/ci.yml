@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Test the PR issue check script
+        run: bun test scripts
+
+      - name: Install MkDocs
+        run: pip install -r requirements.txt
+
+      - name: Fetch API specs from the service repos
+        run: ./scripts/fetch-openapi.sh
+
+      - name: Build (strict: broken links fail)
+        run: mkdocs build --strict
+        env:
+          NO_MKDOCS_2_WARNING: "1"
+
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: "docs/**/*.md"

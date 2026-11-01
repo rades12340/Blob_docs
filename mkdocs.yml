@@ -1,0 +1,93 @@
+site_name: Blob storage system
+site_description: How the Blob storage services fit together, why they were built this way, and what to do when something breaks.
+site_url: https://rades12340.github.io/blob_docs/
+repo_url: https://github.com/rades12340/blob_docs
+repo_name: rades12340/blob_docs
+edit_uri: edit/main/docs/
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: relative_to_docs
+    unrecognized_links: warn
+
+nav:
+  - Overview: index.md
+  - Getting started: getting-started.md
+  - Architecture:
+      - Request flow: architecture/request-flow.md
+      - Authentication: architecture/auth-flow.md
+      - File storage: architecture/file-storage.md
+      - Logging and request ids: architecture/logging.md
+  - Decisions:
+      - decisions/index.md
+      - decisions/0001-same-origin-api-proxy.md
+      - decisions/0002-own-bun-gateway.md
+      - decisions/0003-file-listing-in-blob-service.md
+      - decisions/0004-jwt-with-rotating-refresh-tokens.md
+      - decisions/0005-trust-proxy.md
+      - decisions/0006-json-logs-and-request-ids.md
+      - decisions/0007-loki-instead-of-elk.md
+      - decisions/0008-repo-per-service.md
+  - API:
+      - Using the API: api/index.md
+      - Auth API reference: api/auth.md
+      - Blob API reference: api/blob.md
+  - Runbooks:
+      - runbooks/index.md
+      - Gateway returns 502: runbooks/gateway-502.md
+      - CORS error or signed out: runbooks/cors-or-signed-out.md
+      - S3 unreachable: runbooks/s3-unreachable.md
+      - Refresh token reuse: runbooks/refresh-token-reuse.md
+      - Upload rejected or cut off: runbooks/upload-too-large.md
+      - Rotate the JWT key: runbooks/rotate-jwt-key.md
+      - Rotate S3 keys: runbooks/rotate-s3-keys.md
+  - Operations:
+      - Observability: operations/observability.md
+      - Security checklist: operations/security.md
+      - Running on AWS: operations/aws.md
+  - Contributing: contributing.md
+
+extra_css:
+  - stylesheets/extra.css

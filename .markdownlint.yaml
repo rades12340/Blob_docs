@@ -1,0 +1,5 @@
+# Prose-friendly defaults: long lines and inline HTML (Redoc, attr_list) are fine.
+default: true
+MD013: false
+MD033: false
+MD046: false

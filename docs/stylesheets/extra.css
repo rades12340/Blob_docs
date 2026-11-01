@@ -1,0 +1,9 @@
+/* API reference pages: give Redoc's three-column layout the full width. */
+.md-main__inner:has(#redoc) {
+  max-width: none;
+}
+
+.md-content:has(#redoc) .md-content__inner {
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+}

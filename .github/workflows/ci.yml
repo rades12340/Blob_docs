@@ -35,7 +35,7 @@ jobs:
       - name: Fetch API specs from the service repos
         run: ./scripts/fetch-openapi.sh
 
-      - name: Build (strict: broken links fail)
+      - name: "Build (strict: broken links fail)"
         run: mkdocs build --strict
         env:
           NO_MKDOCS_2_WARNING: "1"

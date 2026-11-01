@@ -122,6 +122,7 @@ The browser sets `window.location.href` to the link. Because S3 answers with `Co
 | `404` | Blob_storage | Unknown file id, or another user's file. |
 | `413` | Blob_storage | File over `MAX_UPLOAD_BYTES`. |
 | `429 { error: "Too many requests" }` | Gateway, or auth_service for `/register` and `/login` (20/min per IP) | Rate limit. |
+| `500` on `/api/*` | Blob_frontend's server | It couldn't reach the gateway at `GATEWAY_URL`, for example because the gateway stack isn't running. |
 | `502 { error: "Upstream unavailable" }` | Gateway | It couldn't reach auth_service or Blob_storage. See [Gateway returns 502](../runbooks/gateway-502.md). |
 | `502 { error: "Storage unavailable" }` | Blob_storage | It couldn't reach S3. See [S3 unreachable](../runbooks/s3-unreachable.md). |
 

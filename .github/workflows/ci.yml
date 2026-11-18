@@ -41,6 +41,6 @@ jobs:
           NO_MKDOCS_2_WARNING: "1"
 
       - name: Lint Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v20
+        uses: DavidAnson/markdownlint-cli2-action@v25
         with:
           globs: "docs/**/*.md"
